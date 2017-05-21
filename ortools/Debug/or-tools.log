@@ -1,0 +1,407 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of logging.cc will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are base\logging.cc, flatzinc\logging.cc.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of assignment.cc will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are constraint_solver\assignment.cc, graph\assignment.cc.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of constraints.cc will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are constraint_solver\constraints.cc, flatzinc\constraints.cc.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of sat_constraint.cc will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are constraint_solver\sat_constraint.cc, flatzinc\sat_constraint.cc.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of table.cc will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are constraint_solver\table.cc, sat\table.cc.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of util.cc will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are graph\util.cc, sat\util.cc.
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(936,5): warning MSB8027: Two or more files with the name of lp_utils.cc will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are lp_data\lp_utils.cc, sat\lp_utils.cc.
+  xml_helper.cc
+util\xml_helper.cc(15): fatal error C1083: Cannot open include file: 'ortools/util/xml_helper.h': No such file or directory
+  time_limit.cc
+util\time_limit.cc(14): fatal error C1083: Cannot open include file: 'ortools/util/time_limit.h': No such file or directory
+  stats.cc
+util\stats.cc(15): fatal error C1083: Cannot open include file: 'ortools/util/stats.h': No such file or directory
+  sorted_interval_list.cc
+util\sorted_interval_list.cc(14): fatal error C1083: Cannot open include file: 'ortools/util/sorted_interval_list.h': No such file or directory
+  rcpsp_parser.cc
+util\rcpsp_parser.cc(14): fatal error C1083: Cannot open include file: 'ortools/util/rcpsp_parser.h': No such file or directory
+  rational_approximation.cc
+util\rational_approximation.cc(14): fatal error C1083: Cannot open include file: 'ortools/util/rational_approximation.h': No such file or directory
+  range_query_function.cc
+util\range_query_function.cc(14): fatal error C1083: Cannot open include file: 'ortools/util/range_query_function.h': No such file or directory
+  proto_tools.cc
+util\proto_tools.cc(14): fatal error C1083: Cannot open include file: 'ortools/util/proto_tools.h': No such file or directory
+  piecewise_linear_function.cc
+util\piecewise_linear_function.cc(14): fatal error C1083: Cannot open include file: 'ortools/util/piecewise_linear_function.h': No such file or directory
+  graph_export.cc
+util\graph_export.cc(15): fatal error C1083: Cannot open include file: 'ortools/util/graph_export.h': No such file or directory
+  fp_utils.cc
+util\fp_utils.cc(14): fatal error C1083: Cannot open include file: 'ortools/util/fp_utils.h': No such file or directory
+  cached_log.cc
+util\cached_log.cc(15): fatal error C1083: Cannot open include file: 'ortools/util/cached_log.h': No such file or directory
+  bitset.cc
+util\bitset.cc(15): fatal error C1083: Cannot open include file: 'ortools/util/bitset.h': No such file or directory
+  util.cc
+sat\util.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/util.h': No such file or directory
+  timetable_edgefinding.cc
+sat\timetable_edgefinding.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/timetable_edgefinding.h': No such file or directory
+  timetable.cc
+sat\timetable.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/timetable.h': No such file or directory
+  theta_tree.cc
+sat\theta_tree.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/theta_tree.h': No such file or directory
+  table.cc
+sat\table.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/table.h': No such file or directory
+  symmetry.cc
+sat\symmetry.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/symmetry.h': No such file or directory
+  simplification.cc
+sat\simplification.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/simplification.h': No such file or directory
+  Generating Code...
+  Compiling...
+  sat_solver.cc
+sat\sat_solver.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/sat_solver.h': No such file or directory
+  precedences.cc
+sat\precedences.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/precedences.h': No such file or directory
+  pb_constraint.cc
+sat\pb_constraint.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/pb_constraint.h': No such file or directory
+  overload_checker.cc
+sat\overload_checker.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/overload_checker.h': No such file or directory
+  optimization.cc
+sat\optimization.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/optimization.h': No such file or directory
+  no_cycle.cc
+sat\no_cycle.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/no_cycle.h': No such file or directory
+  lp_utils.cc
+sat\lp_utils.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/lp_utils.h': No such file or directory
+  linear_programming_constraint.cc
+sat\linear_programming_constraint.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/linear_programming_constraint.h': No such file or directory
+  intervals.cc
+sat\intervals.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/intervals.h': No such file or directory
+  integer_expr.cc
+sat\integer_expr.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/integer_expr.h': No such file or directory
+  integer.cc
+sat\integer.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/integer.h': No such file or directory
+  flow_costs.cc
+sat\flow_costs.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/flow_costs.h': No such file or directory
+  encoding.cc
+sat\encoding.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/encoding.h': No such file or directory
+  drat.cc
+sat\drat.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/drat.h': No such file or directory
+  disjunctive.cc
+sat\disjunctive.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/disjunctive.h': No such file or directory
+  cumulative.cc
+sat\cumulative.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/cumulative.h': No such file or directory
+  cp_constraints.cc
+sat\cp_constraints.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/cp_constraints.h': No such file or directory
+  clause.cc
+sat\clause.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/clause.h': No such file or directory
+  boolean_problem.cc
+sat\boolean_problem.cc(14): fatal error C1083: Cannot open include file: 'ortools/sat/boolean_problem.h': No such file or directory
+  sparse_column.cc
+lp_data\sparse_column.cc(14): fatal error C1083: Cannot open include file: 'ortools/lp_data/sparse_column.h': No such file or directory
+  Generating Code...
+  Compiling...
+  sparse.cc
+lp_data\sparse.cc(15): fatal error C1083: Cannot open include file: 'ortools/lp_data/sparse.h': No such file or directory
+  proto_utils.cc
+lp_data\proto_utils.cc(14): fatal error C1083: Cannot open include file: 'ortools/lp_data/proto_utils.h': No such file or directory
+  mps_reader.cc
+lp_data\mps_reader.cc(15): fatal error C1083: Cannot open include file: 'ortools/lp_data/mps_reader.h': No such file or directory
+  matrix_utils.cc
+lp_data\matrix_utils.cc(14): fatal error C1083: Cannot open include file: 'ortools/lp_data/matrix_utils.h': No such file or directory
+  matrix_scaler.cc
+lp_data\matrix_scaler.cc(15): fatal error C1083: Cannot open include file: 'ortools/lp_data/matrix_scaler.h': No such file or directory
+  lp_utils.cc
+lp_data\lp_utils.cc(15): fatal error C1083: Cannot open include file: 'ortools/lp_data/lp_utils.h': No such file or directory
+  lp_types.cc
+lp_data\lp_types.cc(14): fatal error C1083: Cannot open include file: 'ortools/lp_data/lp_types.h': No such file or directory
+  lp_print_utils.cc
+lp_data\lp_print_utils.cc(15): fatal error C1083: Cannot open include file: 'ortools/lp_data/lp_print_utils.h': No such file or directory
+  lp_decomposer.cc
+lp_data\lp_decomposer.cc(14): fatal error C1083: Cannot open include file: 'ortools/lp_data/lp_decomposer.h': No such file or directory
+  lp_data.cc
+lp_data\lp_data.cc(15): fatal error C1083: Cannot open include file: 'ortools/lp_data/lp_data.h': No such file or directory
+  scip_interface.cc
+  model_validator.cc
+linear_solver\model_validator.cc(14): fatal error C1083: Cannot open include file: 'ortools/linear_solver/model_validator.h': No such file or directory
+  model_exporter.cc
+linear_solver\model_exporter.cc(14): fatal error C1083: Cannot open include file: 'ortools/linear_solver/model_exporter.h': No such file or directory
+  linear_solver.cc
+linear_solver\linear_solver.cc(16): fatal error C1083: Cannot open include file: 'ortools/linear_solver/linear_solver.h': No such file or directory
+  linear_expr.cc
+linear_solver\linear_expr.cc(14): fatal error C1083: Cannot open include file: 'ortools/linear_solver/linear_expr.h': No such file or directory
+  gurobi_interface.cc
+  glpk_interface.cc
+  glop_utils.cc
+linear_solver\glop_utils.cc(14): fatal error C1083: Cannot open include file: 'ortools/linear_solver/glop_utils.h': No such file or directory
+  glop_interface.cc
+linear_solver\glop_interface.cc(20): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  cplex_interface.cc
+linear_solver\cplex_interface.cc(19): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  Generating Code...
+  Compiling...
+  clp_interface.cc
+linear_solver\clp_interface.cc(22): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  cbc_interface.cc
+linear_solver\cbc_interface.cc(23): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  bop_interface.cc
+linear_solver\bop_interface.cc(18): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  util.cc
+graph\util.cc(14): fatal error C1083: Cannot open include file: 'ortools/graph/util.h': No such file or directory
+  shortestpaths.cc
+graph\shortestpaths.cc(15): fatal error C1083: Cannot open include file: 'ortools/graph/shortestpaths.h': No such file or directory
+  min_cost_flow.cc
+graph\min_cost_flow.cc(15): fatal error C1083: Cannot open include file: 'ortools/graph/min_cost_flow.h': No such file or directory
+  max_flow.cc
+graph\max_flow.cc(15): fatal error C1083: Cannot open include file: 'ortools/graph/max_flow.h': No such file or directory
+  linear_assignment.cc
+graph\linear_assignment.cc(15): fatal error C1083: Cannot open include file: 'ortools/graph/linear_assignment.h': No such file or directory
+  dijkstra.cc
+graph\dijkstra.cc(20): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  cliques.cc
+graph\cliques.cc(15): fatal error C1083: Cannot open include file: 'ortools/graph/cliques.h': No such file or directory
+  bellman_ford.cc
+graph\bellman_ford.cc(19): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  astar.cc
+graph\astar.cc(20): fatal error C1083: Cannot open include file: 'ortools/base/callback.h': No such file or directory
+  assignment.cc
+graph\assignment.cc(14): fatal error C1083: Cannot open include file: 'ortools/graph/assignment.h': No such file or directory
+  variable_values.cc
+glop\variable_values.cc(14): fatal error C1083: Cannot open include file: 'ortools/glop/variable_values.h': No such file or directory
+  variables_info.cc
+glop\variables_info.cc(14): fatal error C1083: Cannot open include file: 'ortools/glop/variables_info.h': No such file or directory
+  update_row.cc
+glop\update_row.cc(14): fatal error C1083: Cannot open include file: 'ortools/glop/update_row.h': No such file or directory
+  status.cc
+glop\status.cc(14): fatal error C1083: Cannot open include file: 'ortools/glop/status.h': No such file or directory
+  revised_simplex.cc
+glop\revised_simplex.cc(15): fatal error C1083: Cannot open include file: 'ortools/glop/revised_simplex.h': No such file or directory
+  reduced_costs.cc
+glop\reduced_costs.cc(14): fatal error C1083: Cannot open include file: 'ortools/glop/reduced_costs.h': No such file or directory
+  primal_edge_norms.cc
+glop\primal_edge_norms.cc(14): fatal error C1083: Cannot open include file: 'ortools/glop/primal_edge_norms.h': No such file or directory
+  Generating Code...
+  Compiling...
+  preprocessor.cc
+glop\preprocessor.cc(15): fatal error C1083: Cannot open include file: 'ortools/glop/preprocessor.h': No such file or directory
+  markowitz.cc
+glop\markowitz.cc(14): fatal error C1083: Cannot open include file: 'ortools/glop/markowitz.h': No such file or directory
+  lu_factorization.cc
+glop\lu_factorization.cc(15): fatal error C1083: Cannot open include file: 'ortools/glop/lu_factorization.h': No such file or directory
+  lp_solver.cc
+glop\lp_solver.cc(15): fatal error C1083: Cannot open include file: 'ortools/glop/lp_solver.h': No such file or directory
+  initial_basis.cc
+glop\initial_basis.cc(15): fatal error C1083: Cannot open include file: 'ortools/glop/initial_basis.h': No such file or directory
+  entering_variable.cc
+glop\entering_variable.cc(15): fatal error C1083: Cannot open include file: 'ortools/glop/entering_variable.h': No such file or directory
+  dual_edge_norms.cc
+glop\dual_edge_norms.cc(14): fatal error C1083: Cannot open include file: 'ortools/glop/dual_edge_norms.h': No such file or directory
+  basis_representation.cc
+glop\basis_representation.cc(15): fatal error C1083: Cannot open include file: 'ortools/glop/basis_representation.h': No such file or directory
+  solver_util.cc
+flatzinc\solver_util.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/solver_util.h': No such file or directory
+  solver_data.cc
+flatzinc\solver_data.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/solver_data.h': No such file or directory
+  solver.cc
+flatzinc\solver.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/solver.h': No such file or directory
+  sat_fz_solver.cc
+flatzinc\sat_fz_solver.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/sat_fz_solver.h': No such file or directory
+  sat_constraint.cc
+flatzinc\sat_constraint.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/sat_constraint.h': No such file or directory
+  reporting.cc
+flatzinc\reporting.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/reporting.h': No such file or directory
+  presolve.cc
+flatzinc\presolve.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/presolve.h': No such file or directory
+  parser_util.cc
+flatzinc\parser_util.cc(16): fatal error C1083: Cannot open include file: 'ortools/flatzinc/parser_util.h': No such file or directory
+  parser_main.cc
+flatzinc\parser_main.cc(20): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  parser.yy.cc
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(48): warning C4005: 'INT8_MIN': macro redefinition
+  ortools/flatzinc/parser.yy.cc(60): note: see previous definition of 'INT8_MIN'
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(49): warning C4005: 'INT16_MIN': macro redefinition
+  ortools/flatzinc/parser.yy.cc(63): note: see previous definition of 'INT16_MIN'
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(50): warning C4005: 'INT32_MIN': macro redefinition
+  ortools/flatzinc/parser.yy.cc(66): note: see previous definition of 'INT32_MIN'
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(52): warning C4005: 'INT8_MAX': macro redefinition
+  ortools/flatzinc/parser.yy.cc(69): note: see previous definition of 'INT8_MAX'
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(53): warning C4005: 'INT16_MAX': macro redefinition
+  ortools/flatzinc/parser.yy.cc(72): note: see previous definition of 'INT16_MAX'
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(54): warning C4005: 'INT32_MAX': macro redefinition
+  ortools/flatzinc/parser.yy.cc(75): note: see previous definition of 'INT32_MAX'
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(56): warning C4005: 'UINT8_MAX': macro redefinition
+  ortools/flatzinc/parser.yy.cc(78): note: see previous definition of 'UINT8_MAX'
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(57): warning C4005: 'UINT16_MAX': macro redefinition
+  ortools/flatzinc/parser.yy.cc(81): note: see previous definition of 'UINT16_MAX'
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\stdint.h(58): warning C4005: 'UINT32_MAX': macro redefinition
+  ortools/flatzinc/parser.yy.cc(84): note: see previous definition of 'UINT32_MAX'
+ortools/flatzinc/parser.lex(12): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  parser.tab.cc
+ortools/flatzinc/parser.yy(24): fatal error C1083: Cannot open include file: 'ortools/base/strutil.h': No such file or directory
+  parser.cc
+flatzinc\parser.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/parser.h': No such file or directory
+  Generating Code...
+  Compiling...
+  model.cc
+flatzinc\model.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/model.h': No such file or directory
+  logging.cc
+flatzinc\logging.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/logging.h': No such file or directory
+  fz.cc
+flatzinc\fz.cc(26): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  flatzinc_constraints.cc
+flatzinc\flatzinc_constraints.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/flatzinc_constraints.h': No such file or directory
+  constraints.cc
+flatzinc\constraints.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/constraints.h': No such file or directory
+  checker.cc
+flatzinc\checker.cc(14): fatal error C1083: Cannot open include file: 'ortools/flatzinc/checker.h': No such file or directory
+  visitor.cc
+constraint_solver\visitor.cc(21): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  utilities.cc
+constraint_solver\utilities.cc(19): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  tree_monitor.cc
+constraint_solver\tree_monitor.cc(25): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  trace.cc
+constraint_solver\trace.cc(22): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  timetabling.cc
+constraint_solver\timetabling.cc(17): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  table.cc
+constraint_solver\table.cc(23): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  softgcc.cc
+constraint_solver\softgcc.cc(16): fatal error C1083: Cannot open include file: 'ortools/base/stringprintf.h': No such file or directory
+  search.cc
+constraint_solver\search.cc(25): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  sched_search.cc
+constraint_solver\sched_search.cc(19): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  sched_expr.cc
+constraint_solver\sched_expr.cc(17): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  sched_constraints.cc
+constraint_solver\sched_constraints.cc(27): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  sat_constraint.cc
+constraint_solver\sat_constraint.cc(14): fatal error C1083: Cannot open include file: 'ortools/constraint_solver/sat_constraint.h': No such file or directory
+  routing_search.cc
+constraint_solver\routing_search.cc(25): fatal error C1083: Cannot open include file: 'ortools/base/small_map.h': No such file or directory
+  routing_neighborhoods.cc
+constraint_solver\routing_neighborhoods.cc(14): fatal error C1083: Cannot open include file: 'ortools/constraint_solver/routing_neighborhoods.h': No such file or directory
+  Generating Code...
+  Compiling...
+  routing_flags.cc
+constraint_solver\routing_flags.cc(14): fatal error C1083: Cannot open include file: 'ortools/constraint_solver/routing_flags.h': No such file or directory
+  routing.cc
+constraint_solver\routing.cc(15): fatal error C1083: Cannot open include file: 'ortools/constraint_solver/routing.h': No such file or directory
+  resource.cc
+constraint_solver\resource.cc(31): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  range_cst.cc
+constraint_solver\range_cst.cc(20): fatal error C1083: Cannot open include file: 'ortools/base/logging.h': No such file or directory
+  pack.cc
+constraint_solver\pack.cc(24): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  nogoods.cc
+constraint_solver\nogoods.cc(18): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  model_cache.cc
+constraint_solver\model_cache.cc(18): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  local_search.cc
+constraint_solver\local_search.cc(27): fatal error C1083: Cannot open include file: 'ortools/base/callback.h': No such file or directory
+  io.cc
+constraint_solver\io.cc(24): fatal error C1083: Cannot open include file: 'ortools/base/callback.h': No such file or directory
+  interval.cc
+constraint_solver\interval.cc(18): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  hybrid.cc
+constraint_solver\hybrid.cc(15): fatal error C1083: Cannot open include file: 'ortools/constraint_solver/hybrid.h': No such file or directory
+  graph_constraints.cc
+constraint_solver\graph_constraints.cc(21): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  gcc.cc
+constraint_solver\gcc.cc(22): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  expr_cst.cc
+constraint_solver\expr_cst.cc(22): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  expr_array.cc
+constraint_solver\expr_array.cc(22): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  expressions.cc
+constraint_solver\expressions.cc(23): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  element.cc
+constraint_solver\element.cc(22): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  diffn.cc
+constraint_solver\diffn.cc(18): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  deviation.cc
+constraint_solver\deviation.cc(21): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  demon_profiler.cc
+constraint_solver\demon_profiler.cc(23): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  Generating Code...
+  Compiling...
+  default_search.cc
+constraint_solver\default_search.cc(24): fatal error C1083: Cannot open include file: 'ortools/base/commandlineflags.h': No such file or directory
+  count_cst.cc
+constraint_solver\count_cst.cc(21): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  constraint_solver.cc
+constraint_solver\constraint_solver.cc(18): fatal error C1083: Cannot open include file: 'ortools/constraint_solver/constraint_solver.h': No such file or directory
+  constraints.cc
+constraint_solver\constraints.cc(22): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  collect_variables.cc
+constraint_solver\collect_variables.cc(20): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  assignment.cc
+constraint_solver\assignment.cc(20): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  alldiff_cst.cc
+constraint_solver\alldiff_cst.cc(23): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  ac4_mdd_reset_table.cc
+constraint_solver\ac4_mdd_reset_table.cc(17): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  ac4r_table.cc
+constraint_solver\ac4r_table.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/integral_types.h': No such file or directory
+  integral_solver.cc
+bop\integral_solver.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/integral_solver.h': No such file or directory
+  complete_optimizer.cc
+bop\complete_optimizer.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/complete_optimizer.h': No such file or directory
+  bop_util.cc
+bop\bop_util.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/bop_util.h': No such file or directory
+  bop_solver.cc
+bop\bop_solver.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/bop_solver.h': No such file or directory
+  bop_solution.cc
+bop\bop_solution.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/bop_solution.h': No such file or directory
+  bop_portfolio.cc
+bop\bop_portfolio.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/bop_portfolio.h': No such file or directory
+  bop_ls.cc
+bop\bop_ls.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/bop_ls.h': No such file or directory
+  bop_lns.cc
+bop\bop_lns.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/bop_lns.h': No such file or directory
+  bop_fs.cc
+bop\bop_fs.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/bop_fs.h': No such file or directory
+  bop_base.cc
+bop\bop_base.cc(14): fatal error C1083: Cannot open include file: 'ortools/bop/bop_base.h': No such file or directory
+  time_support.cc
+base\time_support.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/time_support.h': No such file or directory
+  Generating Code...
+  Compiling...
+  timer.cc
+base\timer.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/timer.h': No such file or directory
+  threadpool.cc
+base\threadpool.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/threadpool.h': No such file or directory
+  sysinfo.cc
+base\sysinfo.cc(27): fatal error C1083: Cannot open include file: 'ortools/base/sysinfo.h': No such file or directory
+  stringprintf.cc
+base\stringprintf.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/stringprintf.h': No such file or directory
+  stringpiece.cc
+base\stringpiece.cc(16): fatal error C1083: Cannot open include file: 'ortools/base/stringpiece.h': No such file or directory
+  split.cc
+base\split.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/split.h': No such file or directory
+  recordio.cc
+base\recordio.cc(14): fatal error C1083: Cannot open include file: 'zlib.h': No such file or directory
+  random.cc
+base\random.cc(30): fatal error C1083: Cannot open include file: 'ortools/base/hash.h': No such file or directory
+  numbers.cc
+base\numbers.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/numbers.h': No such file or directory
+  mutex.cc
+base\mutex.cc(16): fatal error C1083: Cannot open include file: 'ortools/base/mutex.h': No such file or directory
+  logging.cc
+base\logging.cc(17): fatal error C1083: Cannot open include file: 'ortools/base/logging.h': No such file or directory
+  join.cc
+base\join.cc(15): fatal error C1083: Cannot open include file: 'ortools/base/basictypes.h': No such file or directory
+  filelinereader.cc
+base\filelinereader.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/filelinereader.h': No such file or directory
+  file.cc
+base\file.cc(28): fatal error C1083: Cannot open include file: 'ortools/base/file.h': No such file or directory
+  callback.cc
+base\callback.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/callback.h': No such file or directory
+  bitmap.cc
+base\bitmap.cc(14): fatal error C1083: Cannot open include file: 'ortools/base/bitmap.h': No such file or directory
+  sparse_permutation.cc
+algorithms\sparse_permutation.cc(14): fatal error C1083: Cannot open include file: 'ortools/algorithms/sparse_permutation.h': No such file or directory
+  knapsack_solver.cc
+algorithms\knapsack_solver.cc(15): fatal error C1083: Cannot open include file: 'ortools/algorithms/knapsack_solver.h': No such file or directory
+  hungarian_test.cc
+algorithms\hungarian_test.cc(3): fatal error C1083: Cannot open include file: 'ortools/algorithms/hungarian.h': No such file or directory
+  hungarian.cc
+algorithms\hungarian.cc(17): fatal error C1083: Cannot open include file: 'ortools/algorithms/hungarian.h': No such file or directory
+  Generating Code...
+  Compiling...
+  find_graph_symmetries.cc
+algorithms\find_graph_symmetries.cc(14): fatal error C1083: Cannot open include file: 'ortools/algorithms/find_graph_symmetries.h': No such file or directory
+  dynamic_permutation.cc
+algorithms\dynamic_permutation.cc(14): fatal error C1083: Cannot open include file: 'ortools/algorithms/dynamic_permutation.h': No such file or directory
+  dynamic_partition.cc
+algorithms\dynamic_partition.cc(14): fatal error C1083: Cannot open include file: 'ortools/algorithms/dynamic_partition.h': No such file or directory
+  Generating Code...

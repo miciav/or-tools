@@ -109,8 +109,12 @@ namespace operations_research {
 // solution.
 class BaseKnapsackSolver;
 
+// Factory per il solver
 class KnapsackSolver {
  public:
+ // enum interno che serve a definire il tipo di solver che si vuole creare
+ // e' pubblico, in questo modo si puo' richiamare dall'esterno quando si crea
+ //il solver
   enum SolverType {
     KNAPSACK_BRUTE_FORCE_SOLVER = 0,
     KNAPSACK_64ITEMS_SOLVER = 1,
@@ -127,14 +131,15 @@ class KnapsackSolver {
     #endif  // USE_SCIP
   };
 
+  
   explicit KnapsackSolver(const std::string& solver_name);
   KnapsackSolver(SolverType solver_type, const std::string& solver_name);
   virtual ~KnapsackSolver();
 
   // Initializes the solver and enters the problem to be solved.
-  void Init(const std::vector<int64>& profits,
-            const std::vector<std::vector<int64> >& weights,
-            const std::vector<int64>& capacities);
+  void Init(const std::vector<int64>& profits, // vettore dei profitti
+            const std::vector<std::vector<int64> >& weights, // matrice dei pesi (multi-dimensionale)
+            const std::vector<int64>& capacities); // lo zaino ha tante capacità quante sono le dimensioni
 
   // Solves the problem and returns the profit of the optimal solution.
   int64 Solve();
@@ -145,7 +150,9 @@ class KnapsackSolver {
   bool IsSolutionOptimal() const { return is_solution_optimal_; }
   std::string GetName() const;
 
-  bool use_reduction() const { return use_reduction_; }
+  //getter. Perche' c'è const?
+  bool use_reduction() const { return use_reduction_; } 
+  //setter
   void set_use_reduction(bool use_reduction) { use_reduction_ = use_reduction; }
 
   // Time limit in seconds. When a finite time limit is set the solution
@@ -156,19 +163,27 @@ class KnapsackSolver {
 
  private:
   // Trivial reduction of capacity constraints when the capacity is higher than
-  // the sum of the weights of the items. Returns the number of reduced items.
+  // the sum of the weights of the items. 
+  // Returns the number of reduced items.
   int ReduceCapacities(int num_items,
                        const std::vector<std::vector<int64> >& weights,
                        const std::vector<int64>& capacities,
                        std::vector<std::vector<int64> >* reduced_weights,
                        std::vector<int64>* reduced_capacities);
+
+  
   int ReduceProblem(int num_items);
   void ComputeAdditionalProfit(const std::vector<int64>& profits);
   void InitReducedProblem(const std::vector<int64>& profits,
                           const std::vector<std::vector<int64> >& weights,
                           const std::vector<int64>& capacities);
 
-  std::unique_ptr<BaseKnapsackSolver> solver_;
+  // field, il nome per convenzione finisce con _
+  // La classe e' una factory quindi crea e contiene un solver
+  // il tipo e' BaseKnapsackSolver
+  std::unique_ptr<BaseKnapsackSolver> solver_; 
+
+
   std::vector<bool> known_value_;
   std::vector<bool> best_solution_;
   bool is_solution_optimal_ = false;
@@ -179,6 +194,7 @@ class KnapsackSolver {
   double time_limit_seconds_;
   std::unique_ptr<TimeLimit> time_limit_;
 
+  // disallows copy and assignment operator for type KnapsackSolver
   DISALLOW_COPY_AND_ASSIGN(KnapsackSolver);
 };
 
@@ -191,9 +207,11 @@ class KnapsackSolver {
 // code there is one propagator per dimension (KnapsackCapacityPropagator).
 // One of those propagators, named master propagator, is used to guide the
 // search, i.e. decides which item should be assigned next.
+// Michele: Master propagator guida gli altri propagator (uno per dimensione)
+// Nel nostro problema forse ci vorrà un porpagator per zaino.
 // Roughly speaking the search algorithm is:
 //  - While not optimal
-//    - Select next search node to expand
+//    - Select next search node to expand (search node: partial solution) 
 //    - Select next item_i to assign (using master propagator)
 //    - Generate a new search node where item_i is in the knapsack
 //      - Check validity of this new partial solution (using propagators)
@@ -209,6 +227,11 @@ class KnapsackSolver {
 // ----- KnapsackAssignement -----
 // KnapsackAssignement is a small struct used to pair an item with its
 // assignment. It is mainly used for search nodes and updates.
+// -------------------------------
+// Michele: Questa struttura ci dice se un item è assegnato o meno allo zaino.
+// come fare quando ci sono piu' zaini?
+// i casi possibili sono: non assegnato, assegnato a z1, assegnato a z2, assegnato a z3
+// dovrei forse usare un array di bool di dimensione pari al numero degli zaini
 struct KnapsackAssignment {
   KnapsackAssignment(int _item_id, bool _is_in)
       : item_id(_item_id), is_in(_is_in) {}
@@ -228,6 +251,13 @@ struct KnapsackAssignment {
 // simplify the code, especially the GetEfficiency method and vector sorting.
 // As there usually are only few dimensions, the overhead should not be an
 // issue.
+//--------------------------
+// Questa struttura implementa un elemento del da inserire nello zaino.
+// L'elemento è immutabile. La struttura è una versione alleggerita di una 
+// classe. Ha un costruttore, un metodo GetEfficiency statico e tre campi statici.
+// nel nostro poblema i profitti non sono cosi facili da considerare.
+// perche' dipendono dallo zaino, dipendono dalla famiglia e dipendono da come
+// questa viene distribuita.
 struct KnapsackItem {
   KnapsackItem(int _id, int64 _weight, int64 _profit)
       : id(_id), weight(_weight), profit(_profit) {}
@@ -243,25 +273,37 @@ struct KnapsackItem {
   const int64 weight;
   const int64 profit;
 };
-typedef KnapsackItem* KnapsackItemPtr;
+// pointer to kPS item
+typedef KnapsackItem* KnapsackItemPtr; 
 
 // ----- KnapsackSearchNode -----
 // KnapsackSearchNode is a class used to describe a decision in the decision
-// search tree.
+// search tree. It is a partial solution
 // The node is defined by a pointer to the parent search node and an
 // assignment (see KnapsackAssignement).
 // As the current state is not explicitly stored in a search node, one should
 // go through the search tree to incrementally build a partial solution from
 // a previous search node.
+// Michele: ogni volta che creo un search node perche' assegno un item ad uno zaino
+// devo creare un node in cui non assegno quel item allo zaino.
+// Devo anche creare un nodo per ogni altro zaino? la ricerca non è binaria
 class KnapsackSearchNode {
  public:
+ // costruttore
+ // const sia il tipo che il parametro
   KnapsackSearchNode(const KnapsackSearchNode* const parent,
                      const KnapsackAssignment& assignment);
+  // profondita'
   int depth() const { return depth_; }
+  
+  // puntatore al nodo padre
   const KnapsackSearchNode* const parent() const { return parent_; }
+  
+  // restituisca l'oggetto assignment?
   const KnapsackAssignment& assignment() const { return assignment_; }
 
   int64 current_profit() const { return current_profit_; }
+
   void set_current_profit(int64 profit) { current_profit_ = profit; }
 
   int64 profit_upper_bound() const { return profit_upper_bound_; }
@@ -307,14 +349,19 @@ class KnapsackSearchNode {
 // The 'via' field is the common parent of 'from' field and 'to' field.
 // So the state can be built by reverting all decisions from 'from' to 'via'
 // and then applying all decisions from 'via' to 'to'.
+// Michele: via serve come ancestro comune tra due stati dell'albero degli stati. 
+// in questo modo la soluzione parziale non deve essere ricostruita tutta ma 
+// soltanto quella parte che va da via a to. 
 class KnapsackSearchPath {
  public:
   KnapsackSearchPath(const KnapsackSearchNode& from,
-                     const KnapsackSearchNode& to);
+                     const KnapsackSearchNode& to);  // passaggio di dati per riferimento ma il pointer non puo' essere modificato
   void Init();
   const KnapsackSearchNode& from() const { return from_; }
   const KnapsackSearchNode& via() const { return *via_; }
   const KnapsackSearchNode& to() const { return to_; }
+  // restituisce un nodo che e' piu' in alto nell'albero
+  // la profondita' di tale nodo e' depth
   const KnapsackSearchNode* MoveUpToDepth(const KnapsackSearchNode& node,
                                           int depth) const;
 
@@ -330,7 +377,7 @@ class KnapsackSearchPath {
 // KnapsackState represents a partial solution to the knapsack problem.
 class KnapsackState {
  public:
-  KnapsackState();
+  KnapsackState(); // costruttore
 
   // Initializes vectors with number_of_items set to false (i.e. not bound yet).
   void Init(int number_of_items);
@@ -348,8 +395,8 @@ class KnapsackState {
   // 'is_bound_(item_i)' is false when there is no decision for item_i yet.
   // When item_i is bound, 'is_in_(item_i)' represents the presence (true) or
   // the absence (false) of item_i in the current solution.
-  std::vector<bool> is_bound_;
-  std::vector<bool> is_in_;
+  std::vector<bool> is_bound_; // se decisione presa allora true
+  std::vector<bool> is_in_;    // se decisione presa = true => se true nello zaino senno' fuori
 
   DISALLOW_COPY_AND_ASSIGN(KnapsackState);
 };
@@ -362,6 +409,14 @@ class KnapsackState {
 // a protected pure virtual method ending by 'Propagator' is defined.
 // For instance, 'Init' creates a vector of items, and then calls
 // 'InitPropagator' to let the derived class perform its own initialization.
+//
+// Michele questa classe e' interessante. Serve a propagare i constraint
+// in questo momento mi viene in mente il costraint di famiglia.
+// se un elemento della famiglia e' nello zaino anche gli altri elementi della 
+// stessa famiglia dovranno essere scelti in uno zaino.
+// data una scelta bisogna dare priorità agli elementi di quella famiglia prima 
+// di passare agli elementi di un altra famiglia 
+// Michele: questa classe contiene anche profit_lower_bound profit_upper_bound
 class KnapsackPropagator {
  public:
   explicit KnapsackPropagator(const KnapsackState& state);
@@ -374,11 +429,14 @@ class KnapsackPropagator {
   // Updates data structure and then calls UpdatePropagator.
   // Returns false when failure.
   bool Update(bool revert, const KnapsackAssignment& assignment);
+
   // ComputeProfitBounds should set 'profit_lower_bound_' and
   // 'profit_upper_bound_' which are constraint specific.
   virtual void ComputeProfitBounds() = 0;
+
+
   // Returns the id of next item to assign.
-  // Returns kNoSelection when all items are bound.
+  // Returns kNoSelection = -1 when all items are bound.
   virtual int GetNextItemId() const = 0;
 
   int64 current_profit() const { return current_profit_; }
@@ -419,7 +477,8 @@ class KnapsackPropagator {
   void set_profit_upper_bound(int64 profit) { profit_upper_bound_ = profit; }
 
  private:
-  std::vector<KnapsackItemPtr> items_;
+  // vettore di puntatori agli item
+  std::vector<KnapsackItemPtr> items_; 
   int64 current_profit_;
   int64 profit_lower_bound_;
   int64 profit_upper_bound_;
@@ -488,6 +547,7 @@ class KnapsackCapacityPropagator : public KnapsackPropagator {
 
 // ----- BaseKnapsackSolver -----
 // This is the base class for knapsack solvers.
+// it is an abstract class. 
 class BaseKnapsackSolver {
  public:
   explicit BaseKnapsackSolver(const std::string& solver_name)
@@ -527,16 +587,23 @@ class BaseKnapsackSolver {
 // TODO(user): In the case of a multi-dimensional knapsack problem, implement
 // an aggregated propagator to combine all dimensions and give a better guide
 // to select the next item (see, for instance, Dobson's aggregated efficiency).
+//
+// Michele: questo solver implementa il branch and bound
 class KnapsackGenericSolver : public BaseKnapsackSolver {
  public:
   explicit KnapsackGenericSolver(const std::string& solver_name);
   ~KnapsackGenericSolver() override;
 
   // Initializes the solver and enters the problem to be solved.
+  // Override l'inizializzazione della classe astratta
   void Init(const std::vector<int64>& profits,
             const std::vector<std::vector<int64> >& weights,
             const std::vector<int64>& capacities) override;
+
+  // restituisce il numero di elementi dello stato corrente
   int GetNumberOfItems() const { return state_.GetNumberOfItems(); }
+
+
   void GetLowerAndUpperBoundWhenItem(int item_id, bool is_item_in,
                                      int64* lower_bound,
                                      int64* upper_bound) override;
@@ -544,12 +611,16 @@ class KnapsackGenericSolver : public BaseKnapsackSolver {
   // Sets which propagator should be used to guide the search.
   // 'master_propagator_id' should be in 0..p-1 with p the number of
   // propagators.
+  // Michele: qui si definisce il propagatore. si sette un id. 
+  // quindi da qualche parte deve esserci una lista. 
+  // ho l'impressione che dovrò screivere proprio un'altra sezione per il multi knapsack
   void set_master_propagator_id(int master_propagator_id) {
     master_propagator_id_ = master_propagator_id;
   }
 
   // Solves the problem and returns the profit of the optimal solution.
   int64 Solve(TimeLimit* time_limit, bool* is_solution_optimal) override;
+
   // Returns true if the item 'item_id' is packed in the optimal knapsack.
   bool best_solution(int item_id) const override {
     return best_solution_.at(item_id);
@@ -563,10 +634,12 @@ class KnapsackGenericSolver : public BaseKnapsackSolver {
   // Returns true if fails. Note that, even if fails, all propagators should
   // be updated to be in a stable state in order to stay incremental.
   bool UpdatePropagators(const KnapsackSearchPath& path);
+
   // Updates all propagators reverting/applying one decision.
   // Return true if fails. Note that, even if fails, all propagators should
   // be updated to be in a stable state in order to stay incremental.
   bool IncrementalUpdate(bool revert, const KnapsackAssignment& assignment);
+ 
   // Updates the best solution if the current solution has a better profit.
   void UpdateBestSolution();
 
@@ -580,12 +653,17 @@ class KnapsackGenericSolver : public BaseKnapsackSolver {
   int64 GetCurrentProfit() const {
     return propagators_.at(master_propagator_id_)->current_profit();
   }
+
   int64 GetNextItemId() const {
     return propagators_.at(master_propagator_id_)->GetNextItemId();
   }
 
+  // vettore di puntatori ai propagatori
   std::vector<KnapsackPropagator*> propagators_;
+
   int master_propagator_id_;
+
+  //vettore contenente puntatori ai nodi di ricerca
   std::vector<KnapsackSearchNode*> search_nodes_;
   KnapsackState state_;
   int64 best_solution_profit_;

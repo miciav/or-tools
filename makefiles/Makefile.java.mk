@@ -53,7 +53,7 @@ $(LIB_DIR)/com.google.ortools.jar: \
 	$(GEN_DIR)/com/google/ortools/constraintsolver/SearchLimitProtobuf.java \
 	$(GEN_DIR)/com/google/ortools/constraintsolver/RoutingParameters.java \
 	$(GEN_DIR)/com/google/ortools/constraintsolver/RoutingEnums.java
-	$(JAVAC_BIN) -d $(OBJ_DIR) -cp lib$Sprotobuf.jar $(SRC_DIR)$Sortools$Scom$Sgoogle$Sortools$Sconstraintsolver$S*.java $(GEN_DIR)$Scom$Sgoogle$Sortools$Sconstraintsolver$S*.java $(GEN_DIR)$Scom$Sgoogle$Sortools$Salgorithms$S*.java $(GEN_DIR)$Scom$Sgoogle$Sortools$Sgraph$S*.java $(GEN_DIR)$Scom$Sgoogle$Sortools$Slinearsolver$S*.java
+	$(JAVAC_BIN) -d $(OBJ_DIR) -cp lib$Sprotobuf.jar .\\$(GEN_DIR)$Scom$Sgoogle$Sortools$Sconstraintsolver$S*.java .\\$(GEN_DIR)$Scom$Sgoogle$Sortools$Sconstraintsolver$S*.java .\\$(GEN_DIR)$Scom$Sgoogle$Sortools$Salgorithms$S*.java .\\$(GEN_DIR)$Scom$Sgoogle$Sortools$Sgraph$S*.java .\\$(GEN_DIR)$Scom$Sgoogle$Sortools$Slinearsolver$S*.java
 	$(JAR_BIN) cf $(LIB_DIR)$Scom.google.ortools.jar -C $(OBJ_DIR) com$Sgoogle$Sortools$S
 
 $(LIB_DIR)/$(LIB_PREFIX)jniortools.$(JNI_LIB_EXT): \

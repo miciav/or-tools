@@ -333,6 +333,7 @@ int64 KnapsackCapacityPropagator::GetAdditionalProfit(int64 remaining_capacity,
 }
 
 // ----- KnapsackGenericSolver -----
+// Michele: le seguenti funzioni implementano la classe KnapsackGenericSolver.
 KnapsackGenericSolver::KnapsackGenericSolver(const std::string& solver_name)
     : BaseKnapsackSolver(solver_name),
       propagators_(),
@@ -344,23 +345,38 @@ KnapsackGenericSolver::KnapsackGenericSolver(const std::string& solver_name)
 
 KnapsackGenericSolver::~KnapsackGenericSolver() { Clear(); }
 
+
 void KnapsackGenericSolver::Init(const std::vector<int64>& profits,
                                  const std::vector<std::vector<int64>>& weights,
                                  const std::vector<int64>& capacities) {
+  // controllo se il numero delle dimensioni è uguale al numero di pesi
   CHECK_EQ(capacities.size(), weights.size());
 
   Clear();
   const int number_of_items = profits.size();
   const int number_of_dimensions = weights.size();
+
   state_.Init(number_of_items);
   best_solution_.assign(number_of_items, false);
+  
   for (int i = 0; i < number_of_dimensions; ++i) {
+    // controllo che per ogni elemento c'e' il valore di un peso 
+    // uno per ogni dimensione
     CHECK_EQ(number_of_items, weights[i].size());
 
+    // questo e' un vincolo di capacità
     KnapsackCapacityPropagator* propagator =
         new KnapsackCapacityPropagator(state_, capacities[i]);
+
     propagator->Init(profits, weights[i]);
-    propagators_.push_back(propagator);
+    propagators_.push_back(propagator); // vettore di propagatore
+    
+    // se ho due dimensioni avro' due propagatori.
+    // avrò due vincoli da di capacita'
+    // questa cosa va estesa per considerare i vincoli di capacita'
+    // per diversi zaini
+    // allo stesso modo devo ragionare per implementare i vincoli di famiglia
+
   }
   master_propagator_id_ = kMasterPropagatorId;
 }
@@ -390,22 +406,49 @@ void KnapsackGenericSolver::GetLowerAndUpperBoundWhenItem(int item_id,
   }
 }
 
+// questo metodo, insieme con MakeNewNode implementano il B&B
 int64 KnapsackGenericSolver::Solve(TimeLimit* time_limit,
                                    bool* is_solution_optimal) {
+  // controlli sui puntatori: per evitare il caso di puntatori nulli
   DCHECK(time_limit != nullptr);
   DCHECK(is_solution_optimal != nullptr);
+
+  // inizializzo il profitto
   best_solution_profit_ = 0LL;
+
+  // e' la soluzione ottimale. questa variabile è usata come variabile di output
   *is_solution_optimal = true;
 
+  // crea una coda per la ricerca. Deve contenere SearchNode
+  // e' una coda a priorita' che ordina i puntatori ai nodi in ordine decrescente rispetto al 
+  // upper bound. E' una bella struttura. Si usa per avere sempre il nodo con più probabilita' di
+  // riportare l'ottimo
   SearchQueue search_queue;
+  
+  // definizione del nodo di root
+  // assegnamento dummy
   const KnapsackAssignment assignment(kNoSelection, true);
+  // creazione nodo di root senza parent e con assegnamento dummy
   KnapsackSearchNode* root_node = new KnapsackSearchNode(nullptr, assignment);
   root_node->set_current_profit(GetCurrentProfit());
   root_node->set_profit_upper_bound(GetAggregatedProfitUpperBound());
+  // il masterPropagator genera l'id dell'item successivo
   root_node->set_next_item_id(GetNextItemId());
+  
+  // ci sono 2 strutture. Una search_nodes_ e search_queue
+  // search_nodes_ e' un campo di classe search_queue e' relativa al metodo Solve
+  // Adds a new element at the end of the vector, after its current last element. 
+  //The content of val is copied (or moved) to the new element.
+  // This effectively increases the container size by one, which causes an automatic reallocation 
+  // of the allocated storage space if -and only if- the new vector size surpasses the current vector capacity.
   search_nodes_.push_back(root_node);
 
+  // Michele: questo metodo verifica che il nodo successivo a quello passato verifichi o meno 
+  // i vincoli nel caso faccia parte o meno della soluzione
   if (MakeNewNode(*root_node, false)) {
+    // l'ultimo elemento di search_nodes_ viene inserito in search_queue
+    // il metodo MakeNewNode aggiorna search_nodes 
+    // questa cosa è un po' oscura pero'.
     search_queue.push(search_nodes_.back());
   }
   if (MakeNewNode(*root_node, true)) {
@@ -413,23 +456,40 @@ int64 KnapsackGenericSolver::Solve(TimeLimit* time_limit,
   }
 
   KnapsackSearchNode* current_node = root_node;
+
+  // si considerano tutti i nodi fino a che la coda non si svuota o finche'
+  // non si trova un nodo con upper_bound > del profitto della migliore soluzione
+  // questo e' importante perche' la coda è ordinata
+  // anche il tempo di calcolo viene valutato
   while (!search_queue.empty() &&
          search_queue.top()->profit_upper_bound() > best_solution_profit_) {
     if (time_limit->LimitReached()) {
       *is_solution_optimal = false;
       break;
     }
-    KnapsackSearchNode* const node = search_queue.top();
-    search_queue.pop();
 
+    KnapsackSearchNode* const node = search_queue.top();
+    // si toglie l'elemento dalla coda
+    search_queue.pop(); 
+
+    // la prima volta il nodo corrente e' il nodo root
     if (node != current_node) {
+
       KnapsackSearchPath path(*current_node, *node);
       path.Init();
       const bool no_fail = UpdatePropagators(path);
+
+      // aggiorno il current_node
       current_node = node;
+
+      // questo e' un assert che serve a loggare la condizione
       CHECK_EQ(no_fail, true);
+
     }
 
+    // prendo il nodo successivo e valuto se sia da aggiungere o meno allo zaino
+    // Entrambe le situazioni possono essere considerate a meno che almeno un vincolo 
+    // non venga verificato.
     if (MakeNewNode(*node, false)) {
       search_queue.push(search_nodes_.back());
     }
@@ -451,6 +511,7 @@ bool KnapsackGenericSolver::UpdatePropagators(const KnapsackSearchPath& path) {
   // Revert previous changes.
   const KnapsackSearchNode* node = &path.from();
   const KnapsackSearchNode* via = &path.via();
+  // risale l'albero fino a via e valuta i vincoli
   while (node != via) {
     no_fail = IncrementalUpdate(true, node->assignment()) && no_fail;
     node = node->parent();
@@ -474,20 +535,27 @@ int64 KnapsackGenericSolver::GetAggregatedProfitUpperBound() const {
   return upper_bound;
 }
 
+
+
+// Questa e' il metodo più importante: quello che implementa lo scheletro del B&B 
+// 
 bool KnapsackGenericSolver::MakeNewNode(const KnapsackSearchNode& node,
                                         bool is_in) {
   if (node.next_item_id() == kNoSelection) {
     return false;
   }
+  // oggetti assegnati senza new
   KnapsackAssignment assignment(node.next_item_id(), is_in);
   KnapsackSearchNode new_node(&node, assignment);
-
   KnapsackSearchPath path(node, new_node);
   path.Init();
+
+  //Michele: questo punto in cui controllo i vincoli.
+  // se i vincoli sono rispettati allora devo considerare
   const bool no_fail = UpdatePropagators(path);
   if (no_fail) {
-    new_node.set_current_profit(GetCurrentProfit());
-    new_node.set_profit_upper_bound(GetAggregatedProfitUpperBound());
+    new_node.set_current_profit(GetCurrentProfit()); // profitto parziale
+    new_node.set_profit_upper_bound(GetAggregatedProfitUpperBound()); // upperbound
     new_node.set_next_item_id(GetNextItemId());
     UpdateBestSolution();
   }
@@ -501,7 +569,7 @@ bool KnapsackGenericSolver::MakeNewNode(const KnapsackSearchNode& node,
     return false;
   }
 
-  // The node is relevant.
+  // The node is relevant so we add it to search_node vector
   KnapsackSearchNode* relevant_node = new KnapsackSearchNode(&node, assignment);
   relevant_node->set_current_profit(new_node.current_profit());
   relevant_node->set_profit_upper_bound(new_node.profit_upper_bound());
@@ -515,6 +583,7 @@ bool KnapsackGenericSolver::IncrementalUpdate(
     bool revert, const KnapsackAssignment& assignment) {
   // Do not stop on a failure: To be able to be incremental on the update,
   // partial solution (state) and propagators must all be in the same state.
+  // Michele: lo stato e' la soluzione parziale.
   bool no_fail = state_.UpdateState(revert, assignment);
   for (KnapsackPropagator* const prop : propagators_) {
     no_fail = prop->Update(revert, assignment) && no_fail;
@@ -567,6 +636,7 @@ class KnapsackBruteForceSolver : public BaseKnapsackSolver {
   DISALLOW_COPY_AND_ASSIGN(KnapsackBruteForceSolver);
 };
 
+// Michele: i seguenti metodi implementano la classe knapsackBruteForceSolver
 KnapsackBruteForceSolver::KnapsackBruteForceSolver(const std::string& solver_name)
     : BaseKnapsackSolver(solver_name),
       num_items_(0),
@@ -1110,6 +1180,7 @@ int64 KnapsackMIPSolver::Solve(TimeLimit* time_limit,
 }
 
 // ----- KnapsackSolver -----
+// implementazione della classe con branch and bound
 KnapsackSolver::KnapsackSolver(const std::string& solver_name)
     : KnapsackSolver(KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER,
                      solver_name) {}
@@ -1135,6 +1206,8 @@ KnapsackSolver::KnapsackSolver(SolverType solver_type,
       solver_.reset(new KnapsackDynamicProgrammingSolver(solver_name));
       break;
     case KNAPSACK_MULTIDIMENSION_BRANCH_AND_BOUND_SOLVER:
+      // remember that solver_ is a unique ponter. 
+      // reset and set new knapsackGenericSolver
       solver_.reset(new KnapsackGenericSolver(solver_name));
       break;
     #if defined(USE_CBC)

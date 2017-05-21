@@ -223,7 +223,7 @@ dependencies/install/lib/gflags.lib: dependencies/sources/gflags-$(GFLAGS_TAG)/I
 
 dependencies/sources/gflags-$(GFLAGS_TAG)/INSTALL.md: dependencies/archives/gflags-$(GFLAGS_TAG).zip
 	tools\unzip -d dependencies/sources dependencies\archives\gflags-$(GFLAGS_TAG).zip
-	cd dependencies\sources && rename gflags-master gflags-$(GFLAGS_TAG)
+	cd dependencies\sources
 	-$(TOUCH) dependencies\sources\gflags-$(GFLAGS_TAG)\INSTALL.md
 
 dependencies/archives/gflags-$(GFLAGS_TAG).zip:
